@@ -34,6 +34,10 @@ namespace Implement_Identity_In_MVC_App
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
             });
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+            services.Configure<IdentityOptions>(options => {
+                options.Password.RequiredLength = 10;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
