@@ -1,4 +1,5 @@
 using Implement_Identity_In_MVC_App.DataContext;
+using Implement_Identity_In_MVC_App.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +33,7 @@ namespace Implement_Identity_In_MVC_App
             {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
             });
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
