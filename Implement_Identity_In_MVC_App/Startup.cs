@@ -35,7 +35,8 @@ namespace Implement_Identity_In_MVC_App
             });
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
-            services.Configure<IdentityOptions>(options => {
+            services.Configure<IdentityOptions>(options =>
+            {
                 options.Password.RequiredLength = 10;
             });
 
@@ -43,6 +44,8 @@ namespace Implement_Identity_In_MVC_App
             {
                 options.LoginPath = Configuration["LoginPath"];
             });
+
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
