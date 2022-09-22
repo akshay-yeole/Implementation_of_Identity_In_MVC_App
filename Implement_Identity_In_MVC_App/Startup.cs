@@ -38,6 +38,11 @@ namespace Implement_Identity_In_MVC_App
             services.Configure<IdentityOptions>(options => {
                 options.Password.RequiredLength = 10;
             });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = Configuration["LoginPath"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
