@@ -67,5 +67,11 @@ namespace Implement_Identity_In_MVC_App.Controllers
             return View(model);
         }
 
+        [Route("logout")]
+        public async Task<IActionResult> logout()
+        {
+            await repository.SignOutAsync();
+            return RedirectToAction("login","Account");
+        }
     }
 }

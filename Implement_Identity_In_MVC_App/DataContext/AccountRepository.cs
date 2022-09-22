@@ -29,5 +29,10 @@ namespace Implement_Identity_In_MVC_App.DataContext
         {
             return await signInManager.PasswordSignInAsync(model.UserName,model.Password,model.RememberMe,false);
         }
+
+        public async Task SignOutAsync()
+        {
+            await signInManager.SignOutAsync();
+        }
     }
 }

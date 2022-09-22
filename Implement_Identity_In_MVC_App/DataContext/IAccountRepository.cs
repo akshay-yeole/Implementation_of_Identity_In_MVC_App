@@ -8,5 +8,6 @@ namespace Implement_Identity_In_MVC_App.DataContext
     {
         Task<IdentityResult> CreateUserAsync(SignUpModel model);
         Task<SignInResult> SignInAsync(SignInModel model);
+        Task SignOutAsync();
     }
 }
