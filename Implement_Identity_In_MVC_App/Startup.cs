@@ -27,6 +27,7 @@ namespace Implement_Identity_In_MVC_App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
