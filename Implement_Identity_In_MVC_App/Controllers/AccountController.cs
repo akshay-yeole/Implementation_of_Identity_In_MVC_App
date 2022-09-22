@@ -52,13 +52,17 @@ namespace Implement_Identity_In_MVC_App.Controllers
 
         [Route("login")]
         [HttpPost]
-        public async Task<IActionResult> login(SignInModel model)
+        public async Task<IActionResult> login(SignInModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 var res= await repository.SignInAsync(model);
                 if (res.Succeeded)
                 {
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
                     ModelState.Clear();
                     return RedirectToAction("Index","Home");
                 }
