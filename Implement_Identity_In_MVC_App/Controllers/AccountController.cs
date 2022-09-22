@@ -42,5 +42,30 @@ namespace Implement_Identity_In_MVC_App.Controllers
             }
             return View();
         }
+
+        [Route("login")]
+        [HttpGet]
+        public IActionResult login()
+        {
+            return View();
+        }
+
+        [Route("login")]
+        [HttpPost]
+        public async Task<IActionResult> login(SignInModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var res= await repository.SignInAsync(model);
+                if (res.Succeeded)
+                {
+                    ModelState.Clear();
+                    return RedirectToAction("Index","Home");
+                }
+                ModelState.AddModelError("", "Invalid Creds");
+            }
+            return View(model);
+        }
+
     }
 }

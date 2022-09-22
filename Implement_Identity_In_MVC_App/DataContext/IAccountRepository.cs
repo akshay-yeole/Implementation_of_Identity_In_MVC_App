@@ -7,5 +7,6 @@ namespace Implement_Identity_In_MVC_App.DataContext
     public interface IAccountRepository
     {
         Task<IdentityResult> CreateUserAsync(SignUpModel model);
+        Task<SignInResult> SignInAsync(SignInModel model);
     }
 }
