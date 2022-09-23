@@ -38,7 +38,7 @@ namespace Implement_Identity_In_MVC_App.Controllers
                         ModelState.AddModelError("", error.Description);
                     }
                     return View(model);
-                }                  
+                }
             }
             return View();
         }
@@ -56,7 +56,7 @@ namespace Implement_Identity_In_MVC_App.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res= await repository.SignInAsync(model);
+                var res = await repository.SignInAsync(model);
                 if (res.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(returnUrl))
@@ -64,7 +64,7 @@ namespace Implement_Identity_In_MVC_App.Controllers
                         return LocalRedirect(returnUrl);
                     }
                     ModelState.Clear();
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Invalid Creds");
             }
@@ -75,7 +75,35 @@ namespace Implement_Identity_In_MVC_App.Controllers
         public async Task<IActionResult> logout()
         {
             await repository.SignOutAsync();
-            return RedirectToAction("login","Account");
+            return RedirectToAction("login", "Account");
         }
+
+        [Route("changepassword")]
+        [HttpGet]
+        public IActionResult changepassword()
+        {
+            return View();
+        }
+
+        [Route("changepassword")]
+        [HttpPost]
+        public async Task<IActionResult> changepassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var res =await repository.ChangePasswordAsync(model);
+                if (res.Succeeded)
+                {
+                    ViewBag.NewPassword = true;
+                    ModelState.Clear();
+                    return View();
+                }
+                foreach (var error in res.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View(model);
+        } 
     }
 }
